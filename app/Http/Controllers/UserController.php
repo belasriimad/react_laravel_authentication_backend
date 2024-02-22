@@ -29,7 +29,7 @@ class UserController extends Controller
     {
         if($request->validated()) {
             $user = User::whereEmail($request->email)->first();
-            if(!$user || Hash::check($request->password, $user->password)) {
+            if(!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json([
                     'error' => 'These credentials do not match any of our records.'
                 ]);
